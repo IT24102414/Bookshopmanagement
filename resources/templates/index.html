@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- UPDATED TITLE AND FAVICON -->
+    <title>Book Haven</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ87NXxFo2HZi8PxODImU1aJeVamwhH4c3Uig&s">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --font-primary: 'Poppins', sans-serif;
+            --font-display: 'Playfair Display', serif;
+            --color-dark: #411900;
+            --color-footer-dark: #411900;
+            --color-text-dark: #212121;
+            --color-gold: #e6b432;
+            --color-bg-light: #f7f5ed;
+            --color-circle-blue: #4a6a9c;
+            --color-white: #FFFFFF;
+            --shadow-light: 0 8px 30px rgba(0, 0, 0, 0.05);
+            --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: var(--font-primary);
+            color: var(--color-text-dark);
+            background-color: var(--color-white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* --- Reusable Components --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            margin: 0;
+        }
+        .explore-all {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .explore-all .arrow {
+            background-color: var(--color-text-dark);
+            color: var(--color-white);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Header Section --- */
+        header {
+            background-color: var(--color-dark);
+            padding: 15px 0;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img { height: 50px; }
+        .nav-menu { list-style: none; display: flex; gap: 40px; margin: 0; }
+        .nav-menu a { color: var(--color-white); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .user-navigation { display: flex; align-items: center; gap: 20px; color: var(--color-white); font-size: 14px; }
+        .user-navigation a { color: var(--color-white); text-decoration: none; margin: 0 10px; }
+
+        /* --- Hero Banner Section --- */
+        .hero-banner {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-background-book { position: absolute; left: -15%; top: 50%; transform: translateY(-50%); width: 60%; opacity: 0.9; }
+        .hero-container { display: flex; justify-content: flex-end; width: 100%; }
+        .hero-content { z-index: 2; max-width: 550px; }
+        .hero-content h1 { font-family: var(--font-primary); font-size: 2.5rem; margin: 0; font-weight: 400; }
+        .hero-content .highlight { font-family: var(--font-display); font-size: 4rem; color: var(--color-gold); display: block; margin-top: 10px; }
+        .hero-content p { font-size: 1rem; margin: 20px 0 40px; line-height: 1.6; max-width: 90%; }
+        .search-bar { display: flex; border-radius: 50px; background: rgba(0,0,0,0.2); }
+        .search-bar input { flex-grow: 1; padding: 18px 25px; border: none; background: transparent; color: var(--color-white); font-size: 1rem; outline: none; }
+        .search-bar button { padding: 0 25px; border: none; background-color: var(--color-white); color: var(--color-dark); border-radius: 50px; cursor: pointer; font-size: 1.5rem; }
+
+        /* --- "Top Shelf Reads" Section --- */
+        .top-shelf-section {
+            padding: 100px 0;
+            background-color: var(--color-bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+        .top-shelf-section .background-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 25vw; font-family: var(--font-display); color: #EAE8DF; z-index: 1; font-weight: 700; }
+        .top-shelf-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 2; }
+        .top-shelf-header p { text-transform: uppercase; font-weight: 500; }
+        .top-shelf-header h2 { font-family: var(--font-display); font-size: 3.5rem; margin: 10px 0; }
+        .top-shelf-container { display: flex; align-items: center; position: relative; z-index: 2; }
+        .top-shelf-promo { display: flex; align-items: center; gap: 40px; }
+        .promo-circle { width: 400px; height: 400px; background: var(--color-gold); border-radius: 50%; flex-shrink: 0; display:flex; flex-direction:column; justify-content: center; padding: 50px; box-sizing: border-box; }
+        .promo-circle h3 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 15px; }
+        .promo-circle p { line-height: 1.6; }
+        .promo-circle .explore-all { color: var(--color-text-dark); margin-top: 20px; }
+        .top-shelf-carousel { flex-grow: 1; }
+        .shelf { background: #d3c9b8; height: 15px; border-radius: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin: 0 50px; }
+        .shelf-books { display: flex; gap: 30px; transform: translateY(-280px); padding-left: 20px; }
+        .shelf-book { transition: transform 0.3s ease; }
+        .shelf-book:hover { transform: scale(1.05); }
+        .shelf-book img { height: 300px; box-shadow: var(--shadow-strong); border-radius: 5px; }
+        /* --- General Setup --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #fdfdfd;
+        }
+
+        /* --- NEW RELEASE SECTION STYLES --- */
+        .new-release-section {
+            padding: 60px 5%;
+        }
+
+        /* Header Styling */
+        .new-release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .new-release-header h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+
+        .new-release-header h2::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #ffd700;
+            z-index: -1;
+            transform: skew(-15deg);
+        }
+
+        .explore-all-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .explore-all-link span {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .explore-all-link span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #ffd700;
+        }
+
+        .explore-arrow-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Carousel Wrapper */
+        .book-carousel-container {
+            position: relative;
+            background-color: #f5f5f5;
+            border-radius: 40px;
+            padding: 40px 60px;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .carousel-arrow.prev { left: 15px; }
+        .carousel-arrow.next { right: 15px; }
+
+        .book-carousel-track {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding: 20px;
+            margin: -20px;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+        .book-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .book-card {
+            flex: 0 0 260px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .book-card .new-release-tag {
+            position: absolute; top: 60px; right: -25px;
+            background-color: #ffd700; color: #333; padding: 5px 20px;
+            font-weight: bold; font-size: 14px; transform: rotate(90deg);
+        }
+
+        .book-card-image {
+            width: 100%; height: 220px; display: flex;
+            justify-content: center; align-items: center; margin-bottom: 15px;
+            /* NEW: Add a smooth transition for the hover effect */
+            transition: transform 0.3s ease;
+        }
+
+        /* NEW: Add the "jump up" effect on hover */
+        .book-card:hover .book-card-image {
+            transform: translateY(-15px);
+        }
+
+        .book-card-image img { max-height: 100%; max-width: 90%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.15)); }
+        .heart-icon { position: absolute; top: 20px; right: 20px; font-size: 24px; color: #ccc; cursor: pointer; }
+        .book-card h3 { font-size: 1.1rem; margin: 10px 0 5px; min-height: 48px; }
+        .book-card .category { font-size: 0.85rem; color: #888; margin-bottom: 15px; }
+        .book-card .price { font-size: 1.2rem; font-weight: bold; color: #333; }
+
+        .add-to-cart-btn {
+            background-color: #2c3e50; color: white; border: none;
+            padding: 12px 20px; border-radius: 8px; cursor: pointer;
+            font-size: 1em; width: 90%; margin-top: 15px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .book-card.highlight {
+            transform: scale(1.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            z-index: 5;
+        }
+        .book-card.highlight .add-to-cart-btn {
+            display: inline-block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* The jump-up effect should still work on the highlighted card */
+        .book-card.highlight:hover .book-card-image {
+            transform: translateY(-15px);
+        }
+
+        .carousel-pagination { text-align: center; margin-top: 20px; }
+        .dot {
+            display: inline-block; width: 10px; height: 10px;
+            border-radius: 50%; background-color: #ccc; margin: 0 5px;
+            cursor: pointer; transition: background-color 0.3s ease;
+        }
+        .dot.active { background-color: #333; }
+        /* --- Book Carousel Sections (New Release, Special Offers, Magazines) --- */
+        .book-section { padding: 80px 0; }
+        .book-carousel-wrapper { position: relative; }
+        .book-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px; margin: -20px; scrollbar-width: none; }
+        .book-carousel::-webkit-scrollbar { display: none; }
+        .book-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            text-align: center;
+            background: var(--color-white);
+            flex-shrink: 0;
+            width: 280px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .book-card .book-image img { width: 70%; height: 220px; object-fit: contain; margin-bottom: 20px; }
+        .book-card .vertical-tag { position: absolute; top: 30px; left: 0px; background: var(--color-gold); color: var(--color-text-dark); padding: 8px 15px; font-weight: 600; font-size: 13px; border-radius: 0 5px 5px 0; }
+        .book-card .discount-tag { writing-mode: vertical-rl; transform: rotate(180deg); position: absolute; top: 20px; right: 20px; background: var(--color-circle-blue); color: white; padding: 20px 8px; border-radius: 15px; font-weight: 600; }
+        .book-card h3 { font-family: var(--font-display); margin: 10px 0 5px; font-size: 1.1rem; min-height: 48px; }
+        .book-card .category { font-size: 0.85em; color: #888; margin-bottom: 15px; }
+        .book-card .price { font-size: 1.2rem; font-weight: 600; }
+        .price .original { text-decoration: line-through; color: #999; margin-right: 10px; font-size: 1rem; }
+        .carousel-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: #fff; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; box-shadow: var(--shadow-strong); z-index: 10; }
+        .prev-arrow { left: -25px; }
+        .next-arrow { right: -25px; }
+
+
+        /* --- NEW (MODERATED): DARK HORIZONTAL CATEGORY NAVIGATION --- */
+        .horizontal-category-nav {
+            /* The main container has a black background */
+            background-color: #000000;
+            padding: 20px 0;
+            color: #fff;
+        }
+
+        .horizontal-category-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cat-nav-links {
+            display: flex;
+            /* Increased gap for the wider spacing seen in the image */
+            gap: 50px;
+            overflow-x: hidden;
+            white-space: nowrap;
+            flex-grow: 1;
+            margin: 0 30px; /* More space between arrows and links */
+            scroll-behavior: smooth;
+            justify-content: center; /* Center the links if they don't fill the space */
+        }
+
+        .cat-nav-links a {
+            text-decoration: none;
+            color: #fff; /* White text */
+            font-weight: 500;
+            font-size: 18px; /* Slightly larger font */
+            padding: 10px 0;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: capitalize; /* Ensure consistent capitalization */
+        }
+
+        /* This creates the yellow underline, initially hidden */
+        .cat-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; /* Position the line slightly below the text */
+            left: 0;
+            width: 0;
+            height: 3px; /* Thickness of the underline */
+            background-color: #e6b432; /* The gold/yellow theme color */
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* On hover, the text can optionally have a subtle effect */
+        .cat-nav-links a:hover {
+            color: #f0f0f0;
+        }
+
+        /* When a link is hovered or active, the underline animates to full width */
+        .cat-nav-links a:hover::after,
+        .cat-nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cat-nav-links a.active {
+            /* Active link can have a slightly brighter color if desired */
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .cat-nav-arrow {
+            /* Style for the circular arrows */
+            background: #fff; /* White circle background */
+            color: #000;      /* Black arrow character */
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .cat-nav-arrow:hover {
+            transform: scale(1.1); /* Slight zoom effect on hover */
+        }
+        /* --- END OF MODERATED CSS --- */
+
+        /* --- MODERATED: 3-UP DYNAMIC CIRCULAR CAROUSEL --- */
+        .category-showcase {
+            background-color: #f7f5ed;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .category-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            height: 450px;
+        }
+
+        .category-carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .category-slide {
+            position: absolute;
+            top: 0;
+            left: 50%; /* All slides start from the center */
+            height: 100%;
+            width: 35vw;
+            max-width: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.6s ease;
+        }
+
+        /* Set positions for the three visible slides - THIS IS THE KEY CHANGE */
+        .category-slide.is-prev {
+            transform: translateX(-130%) scale(0.7); /* Pushed further left */
+            opacity: 1;
+            z-index: 1;
+        }
+        .category-slide.is-active {
+            transform: translateX(-50%) scale(1); /* Centered perfectly */
+            opacity: 1;
+            z-index: 2;
+        }
+        .category-slide.is-next {
+            transform: translateX(30%) scale(0.7); /* Pushed further right */
+            opacity: 1;
+            z-index: 1;
+        }
+
+        /* Hide slides that are not visible */
+        .category-slide:not(.is-prev):not(.is-active):not(.is-next) {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5);
+            z-index: 0;
+        }
+
+        .category-circle {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background-color 0.6s ease;
+        }
+
+        .is-active .category-circle { background-color: #3b5998; color: white; }
+        .is-prev .category-circle, .is-next .category-circle { background-color: #fff; border: 1px solid #e0e0e0; color: #333; }
+
+        .category-content, .side-title { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; }
+        .category-content { opacity: 0; transition: opacity 0.4s ease; }
+        .side-title { opacity: 1; transition: opacity 0.4s ease; }
+        .is-active .category-content { opacity: 1; }
+        .is-active .side-title { opacity: 0; }
+
+        .category-slide h2 { font-size: 2.2em; margin: 0 0 10px; }
+        .side-title h2 { color: #333; }
+        .category-slide p { margin: 15px 0; line-height: 1.5; }
+
+        .explore-button { border: 2px solid white; border-radius: 50px; padding: 12px 25px; text-decoration: none; color: white; font-weight: bold; display: inline-flex; align-items: center; margin-top: 15px; }
+        .explore-button .arrow { background-color: #fff; color: #3b5998; border-radius: 50%; width: 25px; height: 25px; display: inline-flex; justify-content: center; align-items: center; margin-left: 10px; font-weight: bold; }
+
+        .book-art-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; /* Prevent books from capturing mouse events */ }
+        .is-active .book-art-container { z-index: 3; } /* Ensure active books are on top */
+
+        .book-art-image { position: absolute; width: 30%; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-radius: 5px; }
+        /* Navigation */
+        .showcase-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: #fff; color: #333; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .showcase-arrow.prev { left: 15%; }
+        .showcase-arrow.next { right: 15%; }
+
+        .showcase-pagination { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; }
+        .pagination-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #ccc; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease; }
+        .pagination-dot.is-active { background-color: #3b5998; transform: scale(1.3); }
+        /* --- END OF MODERATED CSS --- */
+        /* --- Vertical Category Cards Section --- */
+        .vertical-card-section { padding: 80px 0; }
+        .vertical-card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .vertical-card {
+            height: 450px;
+            border-radius: 20px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .vertical-card:hover { transform: scale(1.03); }
+        .vertical-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 50%); z-index: 1; }
+        .vertical-card > * { z-index: 2; }
+        .vertical-card h3 { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-display); font-size: 2.5rem; text-align: left; margin: 0; }
+        .vertical-card .explore-link { text-decoration: none; color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .vertical-card .explore-link .arrow { background: white; color: black; border-radius: 50%; width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center; }
+
+        /* --- Footer Section --- */
+        footer {
+            background-color: var(--color-footer-dark);
+            color: #a9a9a9;
+            padding-top: 80px;
+            position: relative;
+        }
+        .footer-bg-books {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-image: url('https://www.vijithayapa.com/wp-content/uploads/2024/02/123456.png');
+            background-repeat: repeat-x;
+            background-position: bottom;
+        }
+        .footer-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 80px; }
+        .footer-about .footer-logo { height: 50px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+        .footer-about p { font-size: 14px; line-height: 1.8; margin-bottom: 15px; }
+        .footer-social a { color: #a9a9a9; text-decoration: none; margin-right: 15px; font-size: 1.2rem; }
+        .footer-payment img { height: 25px; margin-top: 20px; margin-right: 10px; }
+        .link-column h4 { color: var(--color-white); margin-bottom: 25px; font-size: 16px; font-weight: 600; }
+        .link-column ul { list-style: none; padding: 0; margin: 0; }
+        .link-column li { margin-bottom: 12px; }
+        .link-column a { color: #a9a9a9; text-decoration: none; font-size: 14px; }
+        .link-column a:hover { color: var(--color-white); }
+        .footer-bottom { border-top: 1px solid #5a3521; padding: 20px 0; font-size: 13px; }
+        .footer-bottom .container { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container header-container">
+        <a href="#" class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1wt5OQvOGR0d1D48v33OFwjcwMrXTttRMuA&s" alt="Makeen Books Logo">
+        </a>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/">HOME</a></li>
+                <li><a href="/shop">SHOP</a></li>
+                <li><a href="#new-release-section">NEW RELEASE</a></li>
+                <li><a href="#category-showcase">SPECIAL OFFERS</a></li>
+                <li><a href="#">GIFTS & VOUCHERS</a></li>
+            </ul>
+        </nav>
+        <div class="user-navigation">
+            <a href="/cart">Cart</a> / <a href="#">Wishlist</a> /
+            <a th:if="${session.loggedInUser == null}" href="/login">Login</a>
+            <span th:if="${session.loggedInUser != null}">
+                <a href="/profile">Profile</a> / <a href="/logout">Logout</a>
+            </span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO BANNER -->
+    <section class="hero-banner">
+        <img src="https://bookhavenofficial.com/wp-content/uploads/2025/06/123.jpg" alt="Open Book" class="hero-background-book">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>The Greatest Adventures</h1>
+                <span class="highlight">Begin With a Book</span>
+                <p>Step into a world of stories, knowledge, and imagination. Start your next great read today!</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for a book or author...">
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HORIZONTAL CATEGORY NAVIGATION -->
+    <section class="horizontal-category-nav">
+        <div class="container">
+            <div class="cat-nav-arrow" id="scroll-left-btn">←</div>
+            <div class="cat-nav-links" id="category-links">
+                <a href="#">History</a>
+                <a href="#">Poetry</a>
+                <a href="#" class="active">Translations</a>
+                <a href="#">Book Haven Publications</a>
+                <a href="#">Fiction</a>
+                <a href="#">Non-Fiction</a>
+                <a href="#">Children's Books</a>
+                <a href="#">Fantasy</a>
+                <a href="#">Science Fiction</a>
+                <a href="#">Biographies</a>
+            </div>
+            <div class="cat-nav-arrow" id="scroll-right-btn">→</div>
+        </div>
+    </section>
+    <!-- TOP SHELF READS -->
+    <section class="top-shelf-section">
+        <div class="background-text">BEST</div>
+        <div class="container">
+            <div class="top-shelf-header">
+                <p>Bestsellers You'll Love</p>
+                <h2>Top Shelf Reads</h2>
+                <a href="/shop" class="explore-all">EXPLORE ALL <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+            </div>
+            <div class="top-shelf-container">
+                <div class="top-shelf-promo">
+                    <div class="promo-circle">
+                        <h3>Unleashed</h3>
+                        <p>Discover the unfiltered truth about Brexit, Covid, and the Conservative Party from ex-PM.</p>
+                        <a href="/shop" class="explore-all">EXPLORE BOOK <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                    </div>
+                </div>
+                <div class="top-shelf-carousel">
+                    <div class="shelf"></div>
+                    <div class="shelf-books">
+                        <div class="shelf-book"><img src="https://ew.com/thmb/V-4kWBoAQXPa1yvaxSPZaTkXzmM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/wilde-in-love-2000-adec4bb8fb014e8f9efbac0006e0a7f2.jpg" alt="Wildinlove"></div>
+                        <div class="shelf-book"><img src="https://i.pinimg.com/564x/9f/a0/8e/9fa08e532e0a0e267a38fec439fac6cd.jpg" alt="EndGame "></div>
+                        <div class="shelf-book"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Sg8wHqJSbHAmNaoVZzsRcfgVhoNIonFxDw&s" alt="rich dad poor dad"></div>
+                        <div class="shelf-book"><img src="https://jumpbooks.lk/wp-content/uploads/2021/01/The-Psychology-of-Money-1.jpg" alt="psychology of money"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW RELEASES -->
+    <section class="new-release-section">
+        <div class="new-release-header">
+            <h2>New Release</h2>
+            <a href="/shop" class="explore-all-link">
+                <span>EXPLORE ALL</span>
+                <button class="explore-arrow-btn">→</button>
+            </a>
+        </div>
+
+        <div class="book-carousel-container">
+            <button class="carousel-arrow prev" id="prev-btn">←</button>
+
+            <!-- Add IDs for JavaScript to find these elements -->
+            <div class="book-carousel-track" id="new-release-track">
+
+                <!-- Card 1 -->
+                <div class="book-card">
+                    <div class="new-release-tag">New Release</div>
+                    <div class="book-card-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Q_SkiLTA1NHfyO9j-3KB09Taa4AGb1O1u9btuKPsHxQ3LAN6qs2wkxFSeLsvoPqhWjs&usqp=CAU" alt="To Paris and Back"></div>
+                    <h3>To Paris And Back 1977 – 1990...</h3>
+                    <p class="category">Biography & autobiography / History</p>
+                    <p class="price">Rs.3,000.00</p>
+                    <button class="add-to-cart-btn">ADD TO CART</button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="book-card">
+                    <div class="new-release-tag">New Release</div><span class="heart-icon">♡</span>
+                    <div class="book-card-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwA4sL0hKOxkLAJljYa6sq6ff24PAkWNF_pA&s" alt="Comrade Lionel"></div>
+                    <h3>The Half Known Life...</h3>
+                    <p class="category">New Release / Non Fiction</p>
+                    <p class="price">Rs.1,600.00</p>
+                    <button class="add-to-cart-btn">ADD TO CART</button>
+                </div>
+
+                <!-- Card 3 (Initially Highlighted) -->
+                <div class="book-card highlight">
+                    <div class="new-release-tag">New Release</div><span class="heart-icon">♡</span>
+                    <div class="book-card-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKophxLlbpIAe57VMOV1pMyqVVxdVSSKKSDiJdZlmZTVNJCp1ankwyX9XFjf80blRGPGE&usqp=CAU" alt="Kick Off"></div>
+                    <h3>Kick Off</h3>
+                    <p class="category">Children fiction / Children's books</p>
+                    <p class="price">Rs.2,400.00</p>
+                    <button class="add-to-cart-btn">ADD TO CART</button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="book-card">
+                    <div class="new-release-tag">New Release</div><span class="heart-icon">♡</span>
+                    <div class="book-card-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWsQznExhqzJG7c_b13QeBRS19S2j61W0Hgw&s" alt="Mage Nouna Magema Poosa"></div>
+                    <h3>Mage Nouna Magema Poosa</h3>
+                    <p class="category">New Release / Non Fiction</p>
+                    <p class="price">Rs.440.00</p>
+                    <button class="add-to-cart-btn">ADD TO CART</button>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="book-card">
+                    <div class="new-release-tag">New Release</div>
+                    <div class="book-card-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRciwO3idpaYh9HjgKUBtL92LUP2qrPF0umvA&s" alt="Cricket Basics"></div>
+                    <h3>C9 of the best, most fascinating non-fiction books to read in 2023 | The Gentleman's Journal</h3>
+                    <p class="category">New Release / Non Fiction</p>
+                    <p class="price">Rs.2,000.00</p>
+                    <button class="add-to-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+
+            <button class="carousel-arrow next" id="next-btn">→</button>
+
+            <div class="carousel-pagination" id="pagination-dots">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CIRCULAR CATEGORY SHOWCASE -->
+    <section class="category-showcase">
+        <div class="category-carousel-wrapper">
+            <div class="category-carousel-track" id="category-track">
+                <!-- Slides are dynamically inserted here -->
+            </div>
+            <div class="showcase-arrow prev" id="showcase-prev">←</div>
+            <div class="showcase-arrow next" id="showcase-next">→</div>
+            <div class="showcase-pagination" id="showcase-dots">
+                <!-- Dots are dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIAL OFFERS -->
+    <section class="book-section" style="background-color: var(--color-bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Special Offers</h2>
+                <a href="/shop" class="explore-all">EXPLORE ALL <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+            </div>
+            <div class="book-carousel-wrapper">
+                <div class="book-carousel" id="special-offers-carousel"></div>
+                <div class="carousel-nav-arrow prev-arrow"><i class="fas fa-arrow-left"></i></div>
+                <div class="carousel-nav-arrow next-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAGAZINES -->
+    <section class="book-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Magazines</h2>
+                <a href="/shop" class="explore-all">EXPLORE ALL <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+            </div>
+            <div class="book-carousel-wrapper">
+                <div class="book-carousel" id="magazines-carousel"></div>
+                <div class="carousel-nav-arrow prev-arrow"><i class="fas fa-arrow-left"></i></div>
+                <div class="carousel-nav-arrow next-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VERTICAL CATEGORY CARDS -->
+    <section class="vertical-card-section">
+        <div class="container">
+            <div class="vertical-card-grid">
+                <div class="vertical-card" style="background-image: url('data:image/jpeg;base64,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');">
+                    <h3>Adult Fiction</h3>
+                    <a href="/shop" class="explore-link">EXPLORE <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <div class="vertical-card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2aKJB5pKaXAw3bNitFm6vaXhArzMyRuEjZjNCtQdGyI7V5cs58AFC_Z07oQLraNeJsXk&usqp=CAU'); background-color: #c7d5e0;">
+                    <h3>Romance</h3>
+                    <a href="/shop" class="explore-link">EXPLORE <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <div class="vertical-card" style="background-image: url('data:image/jpeg;base64,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'); background-color: #6d5f57;">
+                    <h3>Fiction</h3>
+                    <a href="/shop" class="explore-link">EXPLORE <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <div class="vertical-card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlYfZPKCXXqDjnwjJJGJNAC7oM2XOVIMqC8o8Zl5CAOsiRHB5u0P0w3e9CNFXy4j7vHCk&usqp=CAU'); background-color: #6d5f57;">
+                    <h3> bookhaven Publications</h3>
+                    <a href="/shop" class="explore-link">EXPLORE <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-container">
+        <div class="footer-about">
+            <img src="https://i.imgur.com/tLh0L1v.png" alt="Makeen Books Logo" class="footer-logo">
+            <p>16/1, Claessen Place, Colombo - 05</p>
+            <p>+94 112 816 183</p>
+            <p>info@bookhaven.com</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-payment">
+                <img src="https://www.vijithayapa.com/wp-content/uploads/2024/02/Group-13.png" alt="Visa and Mastercard">
+            </div>
+        </div>
+        <div class="link-column">
+            <h4>CATEGORIES</h4>
+            <ul>
+                <li><a href="#">Adult Fiction</a></li>
+                <li><a href="#">Biography & Autobiography</a></li>
+                <li><a href="#">Children's Books</a></li>
+                <li><a href="#">Dictionary / Thesaurus</a></li>
+                <li><a href="#">Education</a></li>
+                <li><a href="#">Fiction</a></li>
+            </ul>
+        </div>
+        <div class="link-column">
+            <h4>&nbsp;</h4>
+            <ul>
+                <li><a href="#">Graphic Novels / Comics</a></li>
+                <li><a href="#">History</a></li>
+                <li><a href="#">Magazines</a></li>
+                <li><a href="#">Sports / Hobbies</a></li>
+                <li><a href="#">Book Haven Publications</a></li>
+            </ul>
+        </div>
+        <div class="link-column">
+            <h4>SHOP</h4>
+            <ul>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="#">Wish List</a></li>
+                <li><a href="#">Checkout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p>© 2025 Book Haven - All Rights Reserved.</p>
+            <p>Designed & developed with passion</p>
+        </div>
+    </div>
+    <div class="footer-bg-books"></div>
+</footer>
+
+<!-- The JavaScript remains exactly the same as before -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('new-release-track');
+        const cards = Array.from(track.children);
+        const nextButton = document.getElementById('next-btn');
+        const prevButton = document.getElementById('prev-btn');
+        const dotsNav = document.getElementById('pagination-dots');
+
+        let currentIndex = cards.findIndex(card => card.classList.contains('highlight'));
+        if (currentIndex === -1) currentIndex = 0;
+
+        cards.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => {
+                moveToCard(index);
+            });
+            dotsNav.appendChild(dot);
+        });
+        const dots = Array.from(dotsNav.children);
+
+        const moveToCard = (targetIndex) => {
+            const targetCard = cards[targetIndex];
+            const trackWidth = track.clientWidth;
+            const cardWidth = targetCard.offsetWidth;
+            const cardLeft = targetCard.offsetLeft;
+            const scrollPosition = cardLeft - (trackWidth / 2) + (cardWidth / 2);
+
+            track.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+
+            updateClasses(targetIndex);
+            currentIndex = targetIndex;
+        };
+
+        const updateClasses = (targetIndex) => {
+            cards[currentIndex].classList.remove('highlight');
+            dots[currentIndex].classList.remove('active');
+
+            cards[targetIndex].classList.add('highlight');
+            dots[targetIndex].classList.add('active');
+        };
+
+        nextButton.addEventListener('click', () => {
+            const newIndex = (currentIndex + 1) % cards.length;
+            moveToCard(newIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            const newIndex = (currentIndex - 1 + cards.length) % cards.length;
+            moveToCard(newIndex);
+        });
+
+        setTimeout(() => {
+            moveToCard(currentIndex);
+        }, 100);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Sample Data ---
+        const newReleases = [
+            { title: 'My View: Alternate Thinking', category: 'Media', price: 'Rs.5,000.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/My-View-Alternate-Thinking-280x420.jpeg' },
+            { title: 'Aberdeen', category: 'Adult Fiction', price: 'Rs.1,500.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/Aberdeen.jpeg' },
+            { title: 'Kick Off', category: "Children's books", price: 'Rs.2,400.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/Kick-Off.jpeg' },
+            { title: 'Mage Nouma Magema Poosa', category: 'Non Fiction', price: 'Rs.440.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/Mage-Nouna-Magema-Poosa.jpeg' },
+            { title: 'To Paris And Back', category: 'Biography / History', price: 'Rs.3,000.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/To-Paris-And-Back-1977-%E2%80%93-1990-%E2%80%93-Volume-Two-1977-%E2%80%93-1990.jpeg' }
+        ];
+
+        const specialOffers = [
+            { title: 'Disney Adventure Collection', category: 'Children', price: 'Rs.210.00', originalPrice: 'Rs.300.00', discount: '30% OFF', img: 'https://www.vijithayapa.com/wp-content/uploads/2022/09/Disney-Adventure-Collection-Treasure-Planet-280x420.jpeg' },
+            { title: 'Disney Know All About Oceans', category: 'Children', price: 'Rs.375.00', originalPrice: 'Rs.500.00', discount: '25% OFF', img: 'https://www.vijithayapa.com/wp-content/uploads/2022/09/Disney-Know-All-About-Oceans-280x420.jpeg' },
+            { title: 'Cradles On The Sand', category: 'History', price: 'Rs.3,200.00', originalPrice: 'Rs.4,000.00', discount: '20% OFF', img: 'https://www.vijithayapa.com/wp-content/uploads/2022/09/Cradles-On-The-Sand-In-A-Bygone-Era-280x420.jpeg' },
+            { title: 'Journey Through Colombo', category: 'Travel', price: 'Rs.1,200.00', originalPrice: 'Rs.1,500.00', discount: '20% OFF', img: 'https://www.vijithayapa.com/wp-content/uploads/2022/09/Journey-Through-Colombo-280x420.jpeg' },
+        ];
+
+        const magazines = [
+            { title: '100 MVB Coffe Table Book', category: 'Business', price: 'Rs.6,000.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/100-MVB-Coffe-Table-Book-Sep-2025.jpeg' },
+            { title: 'ECHELON - SEPTEMBER 2025', category: 'Business', price: 'Rs.550.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/ECHELON-SEPTEMBER-2025.jpeg' },
+            { title: 'LMD - SEPTEMBER 2025', category: 'Business', price: 'Rs.1,500.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/LMD-SEPTEMBER-2025.jpeg' },
+            { title: 'The Economist 13.09.2025', category: 'News', price: 'Rs.3,185.00', img: 'https://www.vijithayapa.com/wp-content/uploads/2024/09/The-Economist-13.09.2025-To-19.09.2025.jpeg' }
+        ];
+
+        const categories = [
+            { title: 'Nature / Wildlife', books: ['https://i.imgur.com/kGDBLzA.png'] },
+            { title: 'Biography & Autobiography', desc: "The 'Cake that was Baked at Home' attempts to unveil lesser known aspects of the life of Sir...", books: ['https://i.imgur.com/Fw5qY8d.png'] },
+            { title: "Children's Books", books: ['https://i.imgur.com/L1dRwGg.png'] }
+        ];
+
+        // --- Generic Carousel Renderer ---
+        function renderBookCarousel(containerId, books, isOffer = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = books.map(book => `
+                <div class="book-card">
+                    ${isOffer ? `<div class="discount-tag">${book.discount}</div>` : '<div class="vertical-tag">New Release</div>'}
+                    <div class="book-image">
+                        <img src="${book.img}" alt="${book.title}">
+                    </div>
+                    <div>
+                        <h3>${book.title}</h3>
+                        <p class="category">${book.category}</p>
+                        <p class="price">
+                            ${isOffer ? `<span class="original">${book.originalPrice}</span>` : ''}
+                            ${book.price}
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- Category Carousel Logic ---
+        const categoryContainer = document.getElementById('category-carousel');
+        let currentCategoryIndex = 1;
+
+        function renderCategoryCarousel() {
+            categoryContainer.innerHTML = categories.map(cat => `
+                <div class="category-card">
+                    <img src="${cat.books[0]}" alt="" class="book-art art-1">
+                    <h2>${cat.title}</h2>
+                </div>
+            `).join('');
+            updateCategoryClasses();
+        }
+
+        function updateCategoryClasses() {
+            const cards = categoryContainer.querySelectorAll('.category-card');
+            cards.forEach((card, index) => {
+                card.classList.remove('center', 'prev', 'next');
+                card.style.display = 'flex';
+                if (index === currentCategoryIndex) card.classList.add('center');
+                else if (index === (currentCategoryIndex - 1 + categories.length) % categories.length) card.classList.add('prev');
+                else if (index === (currentCategoryIndex + 1) % categories.length) card.classList.add('next');
+                else card.style.display = 'none';
+            });
+        }
+
+        categoryContainer.addEventListener('click', (e) => {
+            const targetCard = e.target.closest('.category-card');
+            if (!targetCard) return;
+            if (targetCard.classList.contains('prev')) currentCategoryIndex = (currentCategoryIndex - 1 + categories.length) % categories.length;
+            else if (targetCard.classList.contains('next')) currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
+            updateCategoryClasses();
+        });
+
+        // --- Horizontal Scrolling for Book Carousels ---
+        function setupCarouselScroll(wrapper) {
+            const carousel = wrapper.querySelector('.book-carousel');
+            const prevBtn = wrapper.querySelector('.prev-arrow');
+            const nextBtn = wrapper.querySelector('.next-arrow');
+            const scrollAmount = carousel.querySelector('.book-card').offsetWidth + 30;
+
+            prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+            nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+        }
+
+        // --- Initial Renders ---
+        renderBookCarousel('new-release-track', newReleases);
+        renderBookCarousel('special-offers-carousel', specialOffers, true);
+        renderBookCarousel('magazines-carousel', magazines);
+        renderCategoryCarousel();
+
+        document.querySelectorAll('.book-carousel-wrapper').forEach(setupCarouselScroll);
+    });
+</script>
+
+
+<!-- SCRIPT FOR HORIZONTAL NAVIGATION -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollContainer = document.getElementById('category-links');
+        const scrollLeftBtn = document.getElementById('scroll-left-btn');
+        const scrollRightBtn = document.getElementById('scroll-right-btn');
+
+        // Amount to scroll on each click. Adjust this value as needed.
+        const scrollAmount = 300;
+
+        scrollLeftBtn.addEventListener('click', function() {
+            scrollContainer.scrollLeft -= scrollAmount;
+        });
+
+        scrollRightBtn.addEventListener('click', function() {
+            scrollContainer.scrollLeft += scrollAmount;
+        });
+    });
+</script>
+<!-- SCRIPT FOR 3-UP DYNAMIC CIRCULAR CAROUSEL -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // The JavaScript logic remains the same as the previous correct answer.
+        // It correctly handles the class-swapping which the new CSS uses.
+        const categories = [
+            { title: "History", description: "Explore the events and figures that shaped our world.", books: [ { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdL6H-ElwNb8Z1exiiOhCxBaEOvb7XfLsEPQ&s', top: '-15%', left: '20%', rot: '-15deg' }, { src: 'https://m.media-amazon.com/images/I/91JUXXuk1VL._SL1500_.jpg', top: '-10%', left: '55%', rot: '10deg' } ] },
+            { title: "Nature / Wildlife", description: "Sri Lanka is one of the most bio diverse countries in the world.", books: [ { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPhsKbdLckbT2zuOYVMiCOHyLXZAaJ0GW5oA&s', top: '-20%', left: '5%', rot: '-10deg' }, { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn5461SwZgZ-saFI6XpS0AXVGwS4UXEqqCsg&s', top: '-10%', left: '35%', rot: '5deg' }, { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTk25H11vZBHkFhwpE9oLVV1TurPIx4jcQzA&s', top: '-15%', left: '65%', rot: '15deg', width: '25%' } ] },
+            { title: "Biography & Aut...", description: "Read the life stories of fascinating individuals and gain inspiration.", books: [ { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQyIwRDV_ZT0-HhENKxxYn3fpDu7ihM51ZIg&s', top: '-20%', left: '25%', rot: '-10deg', width: '35%' }, { src: 'https://images.booksense.com/images/322/120/9780143120322.jpg', top: '-15%', left: '55%', rot: '15deg', width: '30%' } ] },
+            { title: "Children's Books", description: "The story of the kingdom that Ravana had ruled lay over the island.", books: [ { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgVnl-KfTKS_uWIo6i6GuJw2InZXaN4w8jkg&s', top: '-20%', left: '25%', rot: '-15deg' }, { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfNquzve7yfmY9tRISXcBba9dhxK6d0ucF9Q&s', top: '-15%', left: '55%', rot: '10deg' } ] },
+            { title: "Fiction", description: "Get lost in imaginative worlds and compelling narratives.", books: [ { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOFde05zyTI_17rOJ75bLhdNJTabz8DXNk2Q&s', top: '-20%', left: '25%', rot: '-10deg' }, { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFnH7gAvyx8hB4_KRlEygYFqb3QIbGIXgSf8J7tnDW6_QcpfitsDs1PoO_scyyu64mc0&usqp=CAU', top: '-15%', left: '55%', rot: '15deg' } ] }
+        ];
+
+        const track = document.getElementById('category-track');
+        const dotsContainer = document.getElementById('showcase-dots');
+        const prevButton = document.getElementById('showcase-prev');
+        const nextButton = document.getElementById('showcase-next');
+
+        let currentIndex = 0;
+        let isTransitioning = false;
+        let slides = [];
+
+        function generateSlides() {
+            categories.forEach((cat, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'category-slide';
+                slide.dataset.index = index;
+
+                const bookArtHTML = cat.books.map(book =>
+                    `<img src="${book.src}" class="book-art-image" style="top: ${book.top}; left: ${book.left}; transform: rotate(${book.rot}); width: ${book.width || '30%'}">`
+                ).join('');
+
+                slide.innerHTML = `
+                        <div class="category-circle">
+                            <div class="category-content">
+                                <h2>${cat.title}</h2>
+                                <p>${cat.description}</p>
+                                <a href="#" class="explore-button">EXPLORE COLLECTION <span class="arrow">→</span></a>
+                            </div>
+                            <div class="side-title"><h2>${cat.title}</h2></div>
+                        </div>
+                        <div class="book-art-container">${bookArtHTML}</div>
+                    `;
+                track.appendChild(slide);
+
+                const dot = document.createElement('div');
+                dot.className = 'pagination-dot';
+                dot.dataset.index = index;
+                dotsContainer.appendChild(dot);
+            });
+            slides = Array.from(track.children);
+        }
+
+        function updateClasses() {
+            const numSlides = slides.length;
+            slides.forEach((slide, index) => {
+                slide.classList.remove('is-active', 'is-prev', 'is-next');
+
+                if (index === currentIndex) {
+                    slide.classList.add('is-active');
+                } else if (index === (currentIndex - 1 + numSlides) % numSlides) {
+                    slide.classList.add('is-prev');
+                } else if (index === (currentIndex + 1) % numSlides) {
+                    slide.classList.add('is-next');
+                }
+            });
+            Array.from(dotsContainer.children).forEach((dot, index) => {
+                dot.classList.toggle('is-active', index === currentIndex);
+            });
+        }
+
+        function moveTo(newIndex) {
+            if (isTransitioning) return;
+            currentIndex = newIndex;
+            updateClasses();
+        }
+
+        function shiftSlide(direction) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            const numSlides = slides.length;
+            currentIndex = (currentIndex + direction + numSlides) % numSlides;
+            updateClasses();
+            setTimeout(() => { isTransitioning = false; }, 600);
+        }
+
+        prevButton.addEventListener('click', () => shiftSlide(-1));
+        nextButton.addEventListener('click', () => shiftSlide(1));
+        dotsContainer.addEventListener('click', e => {
+            const targetDot = e.target.closest('.pagination-dot');
+            if (targetDot) { moveTo(parseInt(targetDot.dataset.index)); }
+        });
+
+        generateSlides();
+        moveTo(1);
+    });
+</script>
+</body>
+</html>

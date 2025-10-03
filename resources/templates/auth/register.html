@@ -1,0 +1,64 @@
+<!-- src/main/resources/static/auth/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Book Haven</title>
+UE    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Times New Roman', serif; }
+        body { background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-container { background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(93, 64, 55, 0.2); width: 100%; max-width: 450px; overflow: hidden; }
+        .book-header { background: #5d4037; color: #d7ccc8; padding: 30px 20px; text-align: center; }
+        .book-header h1 { font-size: 28px; margin-bottom: 10px; font-weight: 600; }
+        .form-content { padding: 30px; }
+        .input-group { margin-bottom: 20px; position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #8d6e63; font-size: 18px; }
+        .input-group input { width: 100%; padding: 14px 14px 14px 45px; border: 2px solid #bcaaa4; border-radius: 12px; font-size: 16px; background: #f9f7f2; }
+        .input-group input:focus { border-color: #8d6e63; box-shadow: 0 0 0 0.2rem rgba(141, 110, 99, 0.25); }
+        .role-select { display: flex; gap: 15px; margin-top: 10px; }
+        .role-btn { flex: 1; padding: 12px; border: 2px solid #bcaaa4; border-radius: 12px; background: #f9f7f2; color: #5d4037; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .role-btn.active { background: #5d4037; color: #d7ccc8; border-color: #5d4037; }
+        .btn { background: #5d4037; color: #d7ccc8; border: none; padding: 14px; width: 100%; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 20px; }
+        .btn:hover { background: #3e2723; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3); }
+        .links { display: flex; justify-content: center; margin-top: 20px; font-size: 14px; }
+        .links a { color: #5d4037; text-decoration: none; font-weight: 600; }
+        .links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="book-header">
+        <h1>Create Account</h1>
+        <p>Join the Book Haven community</p>
+    </div>
+    <div class="form-content">
+        <form action="/register" method="post">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="fullName" placeholder="Full Name" required minlength="2" maxlength="50" pattern="^[a-zA-Z\s]+$" title="Full name must be 2-50 characters and contain only letters and spaces">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email Address" required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@gmail\.com$" title="Please enter a valid Gmail address (no spaces, must end with @gmail.com)">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*()+\-=^])[^\s]{8,}$" title="Password must be at least 8 characters with 1 uppercase, 1 lowercase, 1 number, 1 special character, and no spaces">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" name="phoneNumber" placeholder="Phone Number" required pattern="^(\+94|0)[0-9]{9}$" title="Enter a valid Sri Lankan mobile number (10 digits starting with 0, or 12 digits starting with +94)">
+            </div>
+            <button class="btn" type="submit">Create Account</button>
+        </form>
+        <div class="links">
+            <a href="/login">Already have an account? Sign In</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

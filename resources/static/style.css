@@ -1,0 +1,427 @@
+/* ===========================================
+   BOOK HAVEN - BROWN COLOR SCHEME
+   =========================================== */
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
+    color: #3e2723;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ===== COLOR PALETTE ===== */
+/* Primary Brown Colors */
+:root {
+    --primary-brown: #8d6e63;      /* Medium brown */
+    --dark-brown: #5d4037;         /* Dark brown */
+    --light-brown: #d7ccc8;        /* Light brown */
+    --accent-brown: #a1887f;       /* Accent brown */
+    --cream: #f5f5dc;              /* Cream background */
+    --beige: #f4f1e8;              /* Beige background */
+    --text-brown: #3e2723;         /* Text brown */
+    --border-brown: #bcaaa4;       /* Border brown */
+}
+
+/* ===== NAVIGATION ===== */
+.navbar {
+    background: var(--dark-brown);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(93, 64, 55, 0.3);
+}
+
+.navbar-brand {
+    color: var(--cream) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.navbar-nav-link {
+    color: var(--light-brown) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.navbar-nav-link:hover {
+    color: var(--cream) !important;
+    text-decoration: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+    background: var(--primary-brown);
+    border-color: var(--primary-brown);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--dark-brown);
+    border-color: var(--dark-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(141, 110, 99, 0.4);
+}
+
+.btn-secondary {
+    background: var(--light-brown);
+    border-color: var(--light-brown);
+    color: var(--text-brown);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-brown);
+    border-color: var(--accent-brown);
+    color: white;
+}
+
+.btn-success {
+    background: #8d6e63;
+    border-color: #8d6e63;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #5d4037;
+    border-color: #5d4037;
+}
+
+.btn-danger {
+    background: #a1887f;
+    border-color: #a1887f;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #8d6e63;
+    border-color: #8d6e63;
+}
+
+/* ===== CARDS ===== */
+.card {
+    border: 1px solid var(--border-brown);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(188, 170, 164, 0.2);
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(188, 170, 164, 0.3);
+}
+
+.card-header {
+    background: var(--light-brown);
+    border-bottom: 1px solid var(--border-brown);
+    color: var(--text-brown);
+    font-weight: 600;
+}
+
+.card-body {
+    background: var(--cream);
+}
+
+/* ===== FORMS ===== */
+.form-control {
+    border: 2px solid var(--border-brown);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-brown);
+    box-shadow: 0 0 0 0.2rem rgba(141, 110, 99, 0.25);
+}
+
+.form-label {
+    color: var(--text-brown);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* ===== TABLES ===== */
+.table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: var(--dark-brown);
+    color: var(--cream);
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: var(--beige);
+}
+
+.table tbody td {
+    border-color: var(--border-brown);
+    color: var(--text-brown);
+    vertical-align: middle;
+}
+
+/* ===== ALERTS ===== */
+.alert-success {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+/* ===== MODALS ===== */
+.modal-content {
+    border-radius: 12px;
+    border: 1px solid var(--border-brown);
+}
+
+.modal-header {
+    background: var(--light-brown);
+    border-bottom: 1px solid var(--border-brown);
+    color: var(--text-brown);
+}
+
+/* ===== BADGES ===== */
+.badge-primary {
+    background: var(--primary-brown);
+}
+
+.badge-secondary {
+    background: var(--light-brown);
+    color: var(--text-brown);
+}
+
+/* ===== PAGINATION ===== */
+.page-link {
+    color: var(--primary-brown);
+    border-color: var(--border-brown);
+    background: white;
+}
+
+.page-link:hover {
+    color: var(--dark-brown);
+    background: var(--light-brown);
+    border-color: var(--accent-brown);
+}
+
+.page-item.active .page-link {
+    background: var(--primary-brown);
+    border-color: var(--primary-brown);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--dark-brown);
+    color: var(--cream);
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.footer h5 {
+    color: var(--light-brown);
+    margin-bottom: 1rem;
+}
+
+.footer a {
+    color: var(--light-brown);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--cream);
+}
+
+/* ===== BOOK CARDS ===== */
+.book-card {
+    border: 1px solid var(--border-brown);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(188, 170, 164, 0.3);
+}
+
+.book-card .card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.book-card .card-body {
+    background: var(--cream);
+    padding: 1.5rem;
+}
+
+.book-card .card-title {
+    color: var(--text-brown);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.book-card .card-text {
+    color: var(--accent-brown);
+    font-size: 0.9rem;
+}
+
+.book-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-brown);
+}
+
+/* ===== CART STYLES ===== */
+.cart-item {
+    border-bottom: 1px solid var(--border-brown);
+    padding: 1rem 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-total {
+    background: var(--light-brown);
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ===== CHECKOUT STYLES ===== */
+.checkout-form {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(188, 170, 164, 0.2);
+}
+
+.checkout-summary {
+    background: var(--beige);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-brown);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-brown {
+    color: var(--text-brown);
+}
+
+.bg-brown {
+    background: var(--primary-brown);
+}
+
+.bg-light-brown {
+    background: var(--light-brown);
+}
+
+.border-brown {
+    border-color: var(--border-brown);
+}
+
+.shadow-brown {
+    box-shadow: 0 4px 15px rgba(188, 170, 164, 0.3);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ===== LOADING STATES ===== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner-border {
+    color: var(--primary-brown);
+}
+
+/* ===== FOCUS STATES ===== */
+.btn:focus,
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(141, 110, 99, 0.25);
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    body {
+        background: white !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
